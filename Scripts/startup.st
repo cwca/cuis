@@ -1,4 +1,4 @@
-| world factor initialSize initialScale |
+| world |
 
 world := UISupervisor ui.
 
@@ -15,12 +15,8 @@ Preferences at: #highlightBlockNesting put: false.
 
 "Not correct way to do this - DisplayScreen not accurage until whenUiInSafeState.
  But, can only go full screen here and have the area be accurate in method below."
- 
-initialSize := (DisplayScreen actualScreenSize x).
-initialScale :=  (DisplayScreen hostOSScaleFactor).
-factor := initialSize / initialScale.
 
-(factor > 800.0)
+(Smalltalk platformName = 'Mac OS')
     ifTrue: [
         Display fullScreenMode: false.
         DisplayScreen hostOSWindowTitle: 'Grey Smalltalk'.
@@ -36,10 +32,6 @@ factor := initialSize / initialScale.
 [
     UISupervisor whenUIinSafeState: [
         | area extent |
-
-        Transcript show: initialSize; cr.
-        Transcript show: initialScale; cr.
-        Transcript show: factor asString; cr.
 
         world submorphs do: [:child | child delete].
 
