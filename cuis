@@ -1,0 +1,6 @@
+shift 1
+if [ "$(uname)" == "Darwin" ]; then
+    ./CuisVM.app/Contents/MacOS/Squeak CuisImage/Cuis?.?-????.image -s Scripts/startup.st "$@"
+elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+    ./CuisVM.app/Contents/Linux-x86_64/squeak CuisImage/?.?-????.image -s Scripts/startup.st "$@"
+fi
