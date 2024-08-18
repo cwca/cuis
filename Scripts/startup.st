@@ -1,3 +1,8 @@
+"This is set up for my personal system - a 27 inch Mac that 
+ should display Cuis in a Window occupying the left half of 
+ the screen; and a 14 Windows laptop that should have
+ Cuis run as full screen.  Change to suit your own needs."
+
 | world |
 
 world := UISupervisor ui.
@@ -13,8 +18,6 @@ Preferences at: #saveReleaseOptionsInWorldMenu put: false.
 Preferences at: #transcriptLogVerbose put: false.
 Preferences at: #highlightBlockNesting put: false.
 
-"Not correct way to do this - DisplayScreen not accurage until whenUiInSafeState.
- But, can only go full screen here and have the area be accurate in method below."
 
 (Smalltalk platformName = 'Mac OS')
     ifTrue: [
