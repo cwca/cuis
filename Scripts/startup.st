@@ -9,7 +9,7 @@ Preferences at: #biggerCursors put: false.
 Preferences at: #caseSensitiveFinds put: true.
 Preferences at: #debugLogTimestamp put: false.
 Preferences at: #focusFollowsMouse put: false.
-Preferences at: #saveReleaseOptionsInWorldMenu put: true.
+Preferences at: #saveReleaseOptionsInWorldMenu put: false.
 Preferences at: #transcriptLogVerbose put: false.
 Preferences at: #highlightBlockNesting put: false.
 
