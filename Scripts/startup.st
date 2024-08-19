@@ -3,11 +3,14 @@
  the screen; and a 14 Windows laptop that should have
  Cuis run as full screen.  Change to suit your own needs."
 
-| world |
+| world codeFont titleFont fontSize |
 
 world := UISupervisor ui.
 
-Preferences at: #defaultFontSize put: 21.
+fontSize := 21.
+titleSize := 18.
+
+Preferences at: #defaultFontSize put: fontSize.
 Preferences at: #balloonHelpEnabled put: false.
 Preferences at: #askConfirmationOnQuit put: false.
 Preferences at: #biggerCursors put: false.
@@ -18,6 +21,22 @@ Preferences at: #saveReleaseOptionsInWorldMenu put: false.
 Preferences at: #transcriptLogVerbose put: false.
 Preferences at: #highlightBlockNesting put: false.
 
+TrueTypeFontFamily readAllTrueTypeFontsIn: DirectoryEntry trueTypeFontsDirectory / 'DejaVu' /  'DejaVuMono'.
+
+codeFont := FontFamily familyName: 'DejaVu Sans Mono' pointSize: fontSize.
+
+Preferences at: #standardCodeFont put: codeFont.
+
+titleFont := FontFamily familyName: 'DejaVu Sans' pointSize:  titleSize.
+
+Preferences at: #windowTitleFont put: titleFont.
+Preferences at: #standardButtonFont put: titleFont.
+
+"standardCodeFont = AbstractFont::TrueTypeFont('DejaVu Sans' 21)"
+"standardListFont"
+"standardMenuFont"
+"standardButtonFont"
+"windowTitleFont = AbstractFont::TrueTypeFont('DejaVu Sans' 25)"
 
 (Smalltalk platformName = 'Mac OS')
     ifTrue: [

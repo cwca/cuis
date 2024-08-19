@@ -1,0 +1,74 @@
+World Menu - Preferences - Load all TrueType Fonts
+World Menu - Preferences - Set System Font...
+
+System - Support - PreferenceSet - class - prefSystem and the like.
+  - setDefaultFont: aFontName
+    - change the font on the whole system without changing point sizes.
+  - setDefaultFont: fontFamilyName spec: defaultFontsSpec
+
+(Preferences at: #standardListFont) pointSize.
+PreferenceSet sysPreferences.
+
+PreferenceSet readAndApplyUserPrefs.  'UserPrefs.txt'
+
+font := FontFamily familyName: FontFamily defaultFamilyName pointSize: pointSize.
+Preferences name: #standardListFont category: #font value: font.
+
+FontFamily defaultFamilyName 'DejaVu Sans'  ... familyName, just a string.
+
+How to read a font not in the system?
+
+Graphics - Text - FontFamily
+ - readIfNeeded: dir
+ - familyName - instance variable
+ - baseFontBySizes - instance variable
+ - AvailableFamilies - class variable
+ - DefaultFamilyName - class variable
+ - DefaultPointSize  - class variable
+
+ FontFamily availableFamilies.  Dictionary 'DejaVu Sans' → a TrueTypeFontFamily
+
+ FontFamily readIfNeeded: dir.  reads 'fontName.txt'
+ TrueTypeFontFamily readAllTrueTypeFontsIn: dir.
+
+ fontNameFile := dir // 'fontName.txt'.
+ fontName := fontNameFile exists ifTrue: [fontNameFile textContents] ifFalse: [dir name].
+
+ DirectoryEntry trueTypeFontsDirectory
+  - this does indeed return a 'DirectoryEntry' class holding True Type Fonts Directory (root)
+
+FontFamily pointSizesFor: 'DejaVu Sans Mono'.  #(6 7 8 9 10 11 12 13 14 15 18 22 26 36 36 48 72 96 144)
+
+References to 'DejaVu Sans':
+  - AbstractVectorCanvas - paths - drawString:  
+    f := FontFamily familyName: 'DejaVu Sans' pointSize: 72
+
+  - Sample09Clock - drawing - drawOn: aCanvas
+      f := FontFamily familyName: 'DejaVu Sans' pointSize: 72
+
+  - TTFontDescription class methodsFor: 'instance accessing' - withFamilyName: aString 
+      "TTFontDescription withFamilyName: 'DejaVu Sans'", comment only
+
+  - VectorCanvas - drawing-text - drawString: aString ...
+     f := FontFamily familyName: 'DejaVu Sans' pointSize: 72.
+
+The default font seems to just "appear" in the image by some mechanism
+outside of the source code.
+
+In Changes file...
+
+TrueTypeFontFamily class, readAllTrueTypeFontsIn
+  "TrueTypeFontFamily readAllTrueTypeFontsIn: DirectoryEntry trueTypeFontsDirectory / 'DejaVu' /  'DejaVuSans'"  comment only
+
+PreferenceSet setDefaultFont: 'DejaVu Sans'
+
+
+
+ Ok, so how do we get a dir?
+
+Smalltalk condenseSources
+ - make a new sources file.  Use this for class split experiments
+
+Fonts working now.  Next up - how to read in a changeset from code?
+ - File dialog, 'install' button.  Code behind that should be what
+   we're looking for.
